@@ -1,0 +1,14 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+    docker-build-and-push:
+        name: Build and Push App
+        uses: fullstack-pw/pipelines/.github/workflows/build-and-push.yml@main
+        with:
+            app-context: "."
+            image-tag: "docker-registry.docker-registry.svc.cluster.local:5000/sample-app:latest"
