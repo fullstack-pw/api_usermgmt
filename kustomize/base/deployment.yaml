@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-usermgmt
+  labels:
+    app: api-usermgmt
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-usermgmt
+  template:
+    metadata:
+      labels:
+        app: api-usermgmt
+    spec:
+      containers:
+      - name: api-usermgmt
+        image: docker-registry.docker-registry.svc.cluster.local:5000/api_usermgmt:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: ENV
+          value: "base"
