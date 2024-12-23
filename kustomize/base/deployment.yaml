@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
       - name: api-usermgmt
-        image: docker-registry.docker-registry.svc.cluster.local:5000/api_usermgmt:latest
+        image: registry.fullstack.pw/fullstack/api_usermgmt:latest
         ports:
         - containerPort: 8080
         env:
         - name: ENV
-          value: "base"
+          value: "dev"
