@@ -8,12 +8,12 @@ variables:
   DOCKER_BUILD_PATH: "."
   ENVIRONMENT: "dev"
 
-test-app:
-  extends: .test-app-template
-  tags:
-  - k8s-gitlab-runner
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
+# test-app:
+#   extends: .test-app-template
+#   tags:
+#   - k8s-gitlab-runner
+#   rules:
+#     - if: '$CI_COMMIT_BRANCH == "main"'
 
 build-docker-image:
   extends: .build-docker-image-template
@@ -24,7 +24,6 @@ build-docker-image:
 
 deploy-app:
   extends: .deploy-app-template
-  tags:
-  - k8s-gitlab-runner
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
+  variables:
+    CONTEXT: "docker-desktop"
+    KUSTOMIZE_DIR: "./kustomize/overlays/dev"
