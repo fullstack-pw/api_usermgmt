@@ -1,29 +1,29 @@
-include:
-  - project: 'pedropilla/pipelines'
-    ref: main
-    file: '/ci-templates.yml'
+# include:
+#   - project: 'pedropilla/pipelines'
+#     ref: main
+#     file: '/ci-templates.yml'
 
-variables:
-  APP_NAME: "api_usermgmt"
-  DOCKER_BUILD_PATH: "."
-  ENVIRONMENT: "dev"
+# variables:
+#   APP_NAME: "api_usermgmt"
+#   DOCKER_BUILD_PATH: "."
+#   ENVIRONMENT: "dev"
 
-# test-app:
-#   extends: .test-app-template
+# # test-app:
+# #   extends: .test-app-template
+# #   tags:
+# #   - k8s-gitlab-runner
+# #   rules:
+# #     - if: '$CI_COMMIT_BRANCH == "main"'
+
+# build-docker-image:
+#   extends: .build-docker-image-template
 #   tags:
 #   - k8s-gitlab-runner
 #   rules:
 #     - if: '$CI_COMMIT_BRANCH == "main"'
 
-build-docker-image:
-  extends: .build-docker-image-template
-  tags:
-  - k8s-gitlab-runner
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
-
-deploy-app:
-  extends: .deploy-app-template
-  variables:
-    CONTEXT: "docker-desktop"
-    KUSTOMIZE_DIR: "./kustomize/overlays/dev"
+# deploy-app:
+#   extends: .deploy-app-template
+#   variables:
+#     CONTEXT: "docker-desktop"
+#     KUSTOMIZE_DIR: "./kustomize/overlays/dev"

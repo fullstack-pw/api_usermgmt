@@ -1,21 +1,22 @@
-# name: CI/CD Pipeline
+name: CI/CD Pipeline
 
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
 
-# jobs:
-#     docker-build-and-push:
-#       name: Build and Push App
-#       uses: fullstack-pw/pipelines/.github/workflows/build-and-push.yml@main
-#       with:
-#           app-context: "."
-#           image-tag: "registry.fullstack.pw/fullstack/api_usermgmt:latest"
+jobs:
+    docker-build-and-push:
+      name: Build and Push App
+      uses: fullstack-pw/pipelines/.github/workflows/build-and-push.yml@main
+      with:
+          app-context: "."
+          image-tag: "registry.fullstack.pw/fullstack/api_usermgmt:latest"
 
-#     dev-deploy:
-#       needs: docker-build-and-push
-#       name: Deploy Application
-#       uses: fullstack-pw/pipelines/.github/workflows/deploy-kustomize.yml@main
-#       with:
-#         kustomize-dir: "kustomize/overlays/dev"
+    dev-deploy:
+      needs: docker-build-and-push
+      name: Deploy Application
+      uses: fullstack-pw/pipelines/.github/workflows/deploy-kustomize.yml@main
+      with:
+        kustomize-dir: "kustomize/overlays/dev"
+        context: "kubernetes-admin@kubernetes"
