@@ -5,6 +5,10 @@ metadata:
   labels:
     app: api-usermgmt
 spec:
+  tls:
+  - hosts:
+    - api-usermgmt.api.fullstack.pw
+    secretName: fullstack-tls
   ingressClassName: "nginx" # Default ingress class, overridden in overlays
   rules:
   - host: "example.com" # Default host, overridden in overlays

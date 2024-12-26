@@ -19,7 +19,7 @@ metadata:
 spec:
   ingressClassName: "nginx"
   rules:
-  - host: "usermgmt.api.fullstack.pw"
+  - host: "api-usermgmt.fullstack.pw"
     http:
       paths:
       - path: /
