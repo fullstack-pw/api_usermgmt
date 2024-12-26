@@ -4,6 +4,10 @@ on:
   push:
 
 jobs:
-    docker-build-and-push:
-      name: Tests
-      uses: fullstack-pw/pipelines/.github/workflows/go-tests.yml@main
+  go-tests:
+    name: IaC Tests
+    uses: fullstack-pw/pipelines/.github/workflows/go-tests.yml@main
+
+  iac-tests:
+    name: IaC Tests
+    uses: fullstack-pw/pipelines/.github/workflows/iac-tests.yml@main
