@@ -11,3 +11,21 @@ spec:
         env:
         - name: ENV
           value: "dev"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-usermgmt
+spec:
+  ingressClassName: "nginx"
+  rules:
+  - host: "usermgmt.api.fullstack.pw"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-usermgmt
+            port:
+              number: 80

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-usermgmt
+  labels:
+    app: api-usermgmt
+spec:
+  ingressClassName: "nginx" # Default ingress class, overridden in overlays
+  rules:
+  - host: "example.com" # Default host, overridden in overlays
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-usermgmt
+            port:
+              number: 80
