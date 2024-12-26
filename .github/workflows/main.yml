@@ -1,9 +1,13 @@
 name: CI/CD Pipeline
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
     docker-build-and-push:
