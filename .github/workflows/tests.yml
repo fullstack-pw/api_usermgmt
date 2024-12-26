@@ -5,9 +5,5 @@ on:
 
 jobs:
   go-tests:
-    name: IaC Tests
+    name: GO Tests
     uses: fullstack-pw/pipelines/.github/workflows/go-tests.yml@main
-
-  iac-tests:
-    name: IaC Tests
-    uses: fullstack-pw/pipelines/.github/workflows/iac-tests.yml@main
