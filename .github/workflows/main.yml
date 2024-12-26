@@ -11,7 +11,7 @@ jobs:
       uses: fullstack-pw/pipelines/.github/workflows/build-and-push.yml@main
       with:
           app-context: "."
-          image-tag: "registry.fullstack.pw/fullstack/api_usermgmt:latest"
+          image-tag: "registry.fullstack.pw/fullstack/api-usermgmt:latest"
 
     dev-deploy:
       needs: docker-build-and-push

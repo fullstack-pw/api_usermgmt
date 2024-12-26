@@ -4,7 +4,7 @@ include:
     file: '/ci-templates.yml'
 
 variables:
-  APP_NAME: "api_usermgmt"
+  APP_NAME: "api-usermgmt"
   DOCKER_BUILD_PATH: "."
   ENVIRONMENT: "dev"
 
