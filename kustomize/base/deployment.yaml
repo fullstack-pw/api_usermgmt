@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: api-usermgmt
-        image: registry.fullstack.pw/fullstack/api_usermgmt:latest
+        image: registry.fullstack.pw/api-usermgmt:latest
         ports:
         - containerPort: 8080
         env:
