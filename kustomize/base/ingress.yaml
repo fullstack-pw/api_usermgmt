@@ -4,14 +4,21 @@ metadata:
   name: api-usermgmt
   labels:
     app: api-usermgmt
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    external-dns.alpha.kubernetes.io/hostname: api-usermgmt.fullstack.pw
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.org/client-max-body-size: "0"
 spec:
   tls:
   - hosts:
-    - api-usermgmt.api.fullstack.pw
+    - api-usermgmt.fullstack.pw
     secretName: fullstack-tls
-  ingressClassName: "nginx" # Default ingress class, overridden in overlays
+  ingressClassName: "nginx"
   rules:
-  - host: "example.com" # Default host, overridden in overlays
+  - host: "example.com"
     http:
       paths:
       - path: /
@@ -20,4 +27,4 @@ spec:
           service:
             name: api-usermgmt
             port:
-              number: 80
+              number: 443
