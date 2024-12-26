@@ -1,0 +1,9 @@
+name: Tests Pipeline
+
+on:
+  push:
+
+jobs:
+    docker-build-and-push:
+      name: Tests
+      uses: fullstack-pw/pipelines/.github/workflows/go-tests.yml@main

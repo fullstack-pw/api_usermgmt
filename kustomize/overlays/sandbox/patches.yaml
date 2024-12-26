@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-usermgmt
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: api-usermgmt
+        env:
+        - name: ENV
+          value: "sandbox"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-usermgmt
+spec:
+  ingressClassName: "nginx"
+  rules:
+  - host: "api-usermgmt.fullstack.pw"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-usermgmt
+            port:
+              number: 443

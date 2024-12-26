@@ -1,9 +1,13 @@
 name: CI/CD Pipeline
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 jobs:
     docker-build-and-push:
@@ -18,6 +22,6 @@ jobs:
       name: Deploy Application
       uses: fullstack-pw/pipelines/.github/workflows/deploy-kustomize.yml@main
       with:
-        kustomize-dir: "kustomize/overlays/dev"
+        kustomize-dir: "kustomize/overlays/sandbox"
         context: "kubernetes-admin@kubernetes"
         app-name: api-usermgmt
