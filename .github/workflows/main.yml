@@ -11,7 +11,7 @@ jobs:
       uses: fullstack-pw/pipelines/.github/workflows/build-and-push.yml@main
       with:
           app-context: "."
-          image-tag: "registry.fullstack.pw/fullstack/api-usermgmt:latest"
+          app-name: "api-usermgmt"
 
     dev-deploy:
       needs: docker-build-and-push
@@ -20,3 +20,4 @@ jobs:
       with:
         kustomize-dir: "kustomize/overlays/dev"
         context: "kubernetes-admin@kubernetes"
+        app-name: api-usermgmt
