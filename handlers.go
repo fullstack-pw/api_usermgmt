@@ -9,6 +9,7 @@ import (
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {
 	users := GetAllUsers()
+	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(users); err != nil {
 		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 	}
@@ -23,14 +24,17 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusNotFound)
 		return
 	}
+	w.Header().Set("Content-Type", "application/json")
 	if err := json.NewEncoder(w).Encode(user); err != nil {
 		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 	}
 }
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "application/json")
 	var user User
-	if err := json.NewDecoder(r.Body).Decode(&user); err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&user); err != nil || user.ID == "" || user.Name == "" || user.Email == "" {
 		http.Error(w, "Invalid input", http.StatusBadRequest)
 		return
 	}
@@ -40,11 +44,13 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	if err := json.NewEncoder(w).Encode(user); err != nil {
 		http.Error(w, "Failed to encode response", http.StatusInternalServerError)
 	}
+
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id := params["id"]
+	w.Header().Set("Content-Type", "application/json")
 
 	var updated User
 	if err := json.NewDecoder(r.Body).Decode(&updated); err != nil {
@@ -65,6 +71,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	id := params["id"]
+	w.Header().Set("Content-Type", "application/json")
 
 	err := DeleteUserByID(id)
 	if err != nil {

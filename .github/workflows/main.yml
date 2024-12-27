@@ -17,7 +17,7 @@ jobs:
           app-context: "."
           app-name: "api-usermgmt"
 
-    dev-deploy:
+    sandbox-deploy:
       needs: docker-build-and-push
       name: Deploy Application
       uses: fullstack-pw/pipelines/.github/workflows/deploy-kustomize.yml@main
@@ -25,3 +25,10 @@ jobs:
         kustomize-dir: "kustomize/overlays/sandbox"
         context: "kubernetes-admin@kubernetes"
         app-name: api-usermgmt
+
+    cypress-tests:
+      needs: sandbox-deploy
+      name: Run Cypress Tests
+      uses: fullstack-pw/pipelines/.github/workflows/cypress.yml@main
+      with:
+        app-url: "https://api-usermgmt.fullstack.pw"

@@ -18,10 +18,17 @@ func LoggingMiddleware(next http.Handler) http.Handler {
 	})
 }
 
+func HealthCheck(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	if _, err := w.Write([]byte("OK")); err != nil {
+		log.Printf("Failed to write response: %v", err)
+	}
+}
+
 func main() {
 	r := mux.NewRouter()
 
-	// User management endpoints
+	r.HandleFunc("/health", HealthCheck).Methods("GET")
 	r.HandleFunc("/users", GetUsers).Methods("GET")
 	r.HandleFunc("/users/{id}", GetUser).Methods("GET")
 	r.HandleFunc("/users", CreateUser).Methods("POST")
