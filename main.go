@@ -28,7 +28,7 @@ func HealthCheck(w http.ResponseWriter, r *http.Request) {
 func main() {
 	r := mux.NewRouter()
 
-	// User management endpoints
+	r.HandleFunc("/health", HealthCheck).Methods("GET")
 	r.HandleFunc("/users", GetUsers).Methods("GET")
 	r.HandleFunc("/users/{id}", GetUser).Methods("GET")
 	r.HandleFunc("/users", CreateUser).Methods("POST")
