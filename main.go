@@ -20,7 +20,9 @@ func LoggingMiddleware(next http.Handler) http.Handler {
 
 func HealthCheck(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("OK"))
+	if _, err := w.Write([]byte("OK")); err != nil {
+		log.Printf("Failed to write response: %v", err)
+	}
 }
 
 func main() {
