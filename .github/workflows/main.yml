@@ -23,7 +23,7 @@ jobs:
       uses: fullstack-pw/pipelines/.github/workflows/deploy-kustomize.yml@main
       with:
         kustomize-dir: "kustomize/overlays/sandbox"
-        context: "kubernetes-admin@kubernetes"
+        context: "sandbox"
         app-name: api-usermgmt
 
     cypress-tests:
