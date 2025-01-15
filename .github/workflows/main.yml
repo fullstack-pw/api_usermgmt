@@ -31,4 +31,4 @@ jobs:
       name: Run Cypress Tests
       uses: fullstack-pw/pipelines/.github/workflows/cypress.yml@main
       with:
-        app-url: "https://api-usermgmt.fullstack.pw"
+        app-url: "https://dev.api-usermgmt.fullstack.pw"

@@ -7,18 +7,20 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    external-dns.alpha.kubernetes.io/hostname: api-usermgmt.fullstack.pw
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    external-dns.alpha.kubernetes.io/hostname: dev.api-usermgmt.fullstack.pw
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
     nginx.org/client-max-body-size: "0"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
 spec:
   tls:
   - hosts:
-    - api-usermgmt.fullstack.pw
+    - dev.api-usermgmt.fullstack.pw
     secretName: fullstack-tls
-  ingressClassName: "nginx"
+  ingressClassName: nginx
   rules:
-  - host: "example.com"
+  - host: dev.api-usermgmt.fullstack.pw
     http:
       paths:
       - path: /
@@ -27,4 +29,4 @@ spec:
           service:
             name: api-usermgmt
             port:
-              number: 443
+              number: 8080

@@ -17,9 +17,9 @@ kind: Ingress
 metadata:
   name: api-usermgmt
 spec:
-  ingressClassName: "traefik"
+  ingressClassName: traefik
   rules:
-  - host: "dev.api-usermgmt.fullstack.pw"
+  - host: dev.api-usermgmt.fullstack.pw
     http:
       paths:
       - path: /
@@ -28,4 +28,4 @@ spec:
           service:
             name: api-usermgmt
             port:
-              number: 443
+              number: 8080
