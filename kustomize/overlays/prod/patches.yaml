@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-usermgmt
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - name: api-usermgmt
+        env:
+        - name: ENV
+          value: "prod"
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: api-usermgmt
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: api-usermgmt.fullstack.pw
+spec:
+  tls:
+  - hosts:
+    - api-usermgmt.fullstack.pw
+    secretName: fullstack-tls
+  ingressClassName: traefik
+  rules:
+  - host: api-usermgmt.fullstack.pw
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-usermgmt
+            port:
+              number: 8080

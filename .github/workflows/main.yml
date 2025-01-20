@@ -48,3 +48,19 @@ jobs:
       uses: fullstack-pw/pipelines/.github/workflows/cypress.yml@main
       with:
         app-url: "https://stg.api-usermgmt.fullstack.pw"
+
+    prod-deploy:
+      needs: stg-cypress-tests
+      name: PROD deploy
+      uses: fullstack-pw/pipelines/.github/workflows/deploy-kustomize.yml@main
+      with:
+        kustomize-dir: "kustomize/overlays/prod"
+        context: "prod"
+        app-name: api-usermgmt
+
+    prod-cypress-tests:
+      needs: prod-deploy
+      name: PROD cypress
+      uses: fullstack-pw/pipelines/.github/workflows/cypress.yml@main
+      with:
+        app-url: "https://api-usermgmt.fullstack.pw"
