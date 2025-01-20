@@ -5,4 +5,4 @@ resources:
 patchesStrategicMerge:
   - patches.yaml
 
-namespace: dev
+namespace: stg

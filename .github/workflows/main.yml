@@ -19,16 +19,32 @@ jobs:
 
     dev-deploy:
       needs: docker-build-and-push
-      name: Deploy Application
+      name: DEV deploy
       uses: fullstack-pw/pipelines/.github/workflows/deploy-kustomize.yml@main
       with:
         kustomize-dir: "kustomize/overlays/dev"
         context: "dev"
         app-name: api-usermgmt
 
-    cypress-tests:
+    dev-cypress-tests:
       needs: dev-deploy
-      name: Run Cypress Tests
+      name: DEV cypress
       uses: fullstack-pw/pipelines/.github/workflows/cypress.yml@main
       with:
         app-url: "https://dev.api-usermgmt.fullstack.pw"
+
+    stg-deploy:
+      needs: dev-cypress-tests
+      name: STG deploy
+      uses: fullstack-pw/pipelines/.github/workflows/deploy-kustomize.yml@main
+      with:
+        kustomize-dir: "kustomize/overlays/stg"
+        context: "stg"
+        app-name: api-usermgmt
+
+    stg-cypress-tests:
+      needs: stg-deploy
+      name: STG cypress
+      uses: fullstack-pw/pipelines/.github/workflows/cypress.yml@main
+      with:
+        app-url: "https://stg.api-usermgmt.fullstack.pw"
