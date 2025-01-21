@@ -6,7 +6,7 @@ include:
 variables:
   APP_NAME: "api-usermgmt"
   DOCKER_BUILD_PATH: "."
-  ENVIRONMENT: "stg"
+  ENVIRONMENT: "prod"
 
 tests:
   extends: .go_tests
@@ -23,8 +23,15 @@ build-docker-image:
 deploy-app:
   extends: .deploy-app-template
   variables:
-    CONTEXT: "stg"
-    KUSTOMIZE_DIR: "./kustomize/overlays/stg"
+    CONTEXT: "prod"
+    KUSTOMIZE_DIR: "./kustomize/overlays/prod"
     KUBECONFIG: "~/.kube/config"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+
+cypress:
+  extends: .cypress-template
+  variables:
+    CYPRESS_BASE_URL: "https://api-usermgmt.fullstack.pw"
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
