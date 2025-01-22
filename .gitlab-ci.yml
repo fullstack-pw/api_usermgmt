@@ -17,8 +17,6 @@ build-docker-image:
   extends: .build-docker-image-template
   tags:
   - k8s-gitlab-runner
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
 
 deploy-app:
   extends: .deploy-app-template
@@ -26,12 +24,8 @@ deploy-app:
     CONTEXT: "prod"
     KUSTOMIZE_DIR: "./kustomize/overlays/prod"
     KUBECONFIG: "~/.kube/config"
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
 
 cypress:
   extends: .cypress-template
   variables:
     CYPRESS_BASE_URL: "https://api-usermgmt.fullstack.pw"
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "main"'
