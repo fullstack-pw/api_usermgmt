@@ -9,6 +9,6 @@ spec:
     app: api-usermgmt
   ports:
     - protocol: TCP
-      port: 443
+      port: 8080
       targetPort: 8080
   type: ClusterIP

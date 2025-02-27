@@ -2,7 +2,7 @@ const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
   e2e: {
-    baseUrl: 'https://api-usermgmt.fullstack.pw',
+    baseUrl: process.env.CYPRESS_BASE_URL,
     supportFile: false,
     specPattern: 'cypress/integration/**/*.spec.js',
   },

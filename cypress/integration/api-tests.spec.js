@@ -1,6 +1,7 @@
 describe('User Management API Tests', () => {
-    const baseUrl = 'https://api-usermgmt.fullstack.pw';
-  
+    // const baseUrl = 'https://dev.api-usermgmt.fullstack.pw';
+    const baseUrl = Cypress.config('baseUrl');
+    
     it('Health Check', () => {
       cy.request(`${baseUrl}/health`)
         .its('status')

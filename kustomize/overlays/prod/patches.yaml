@@ -10,16 +10,22 @@ spec:
       - name: api-usermgmt
         env:
         - name: ENV
-          value: "dev"
+          value: "prod"
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: api-usermgmt
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: api-usermgmt.fullstack.pw
 spec:
+  tls:
+  - hosts:
+    - api-usermgmt.fullstack.pw
+    secretName: fullstack-tls
   ingressClassName: traefik
   rules:
-  - host: dev.api-usermgmt.fullstack.pw
+  - host: api-usermgmt.fullstack.pw
     http:
       paths:
       - path: /
